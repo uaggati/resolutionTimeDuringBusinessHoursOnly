@@ -1,0 +1,38 @@
+IF((end_time - start_time) > 0,
+TEXT(FLOOR((9*(
+  (5*FLOOR((DATEVALUE(end_time) -DATE(1996,01,01))/7) +
+  MIN(5,
+  MOD(DATEVALUE(end_time) -DATE(1996,01,01), 7) +
+  MIN(1, 24/9*(MAX(0,MOD(end_time-DATETIMEVALUE(TEXT(DATEVALUE(end_time))&' 08:00:00'), 1))))
+  ))
+  -
+  (5*FLOOR((DATEVALUE(start_time)-DATE(1996,01,01))/7) +
+  MIN(5,
+  MOD(DATEVALUE(start_time)-DATE(1996,01,01), 7) +
+  MIN(1, 24/9*(MAX(0,MOD(start_time-DATETIMEVALUE(TEXT(DATEVALUE(start_time))&' 08:00:00'), 1))))
+  )) 
+  )*60)/60)) + ' hours ' + LEFT(  TEXT(MOD((9*(
+  (5*FLOOR((DATEVALUE(end_time) -DATE(1996,01,01))/7) +
+  MIN(5,
+  MOD(DATEVALUE(end_time) -DATE(1996,01,01), 7) +
+  MIN(1, 24/9*(MAX(0,MOD(end_time-DATETIMEVALUE(TEXT(DATEVALUE(end_time))&' 08:00:00'), 1))))
+  ))
+  -
+  (5*FLOOR((DATEVALUE(start_time)-DATE(1996,01,01))/7) +
+  MIN(5,
+  MOD(DATEVALUE(start_time)-DATE(1996,01,01), 7) +
+  MIN(1, 24/9*(MAX(0,MOD(start_time-DATETIMEVALUE(TEXT(DATEVALUE(start_time))&' 08:00:00'), 1))))
+  )) 
+  )*60),60)) , 2) + ' minutes ' + LEFT(  TEXT(MOD((9*(
+  (5*FLOOR((DATEVALUE(end_time) -DATE(1996,01,01))/7) +
+  MIN(5,
+  MOD(DATEVALUE(end_time) -DATE(1996,01,01), 7) +
+  MIN(1, 24/9*(MAX(0,MOD(end_time-DATETIMEVALUE(TEXT(DATEVALUE(end_time))&' 08:00:00'), 1))))
+  ))
+  -
+  (5*FLOOR((DATEVALUE(start_time)-DATE(1996,01,01))/7) +
+  MIN(5,
+  MOD(DATEVALUE(start_time)-DATE(1996,01,01), 7) +
+  MIN(1, 24/9*(MAX(0,MOD(start_time-DATETIMEVALUE(TEXT(DATEVALUE(start_time))&' 08:00:00'), 1))))
+  )) 
+  )*60),3600)) , 2) + ' seconds','')
